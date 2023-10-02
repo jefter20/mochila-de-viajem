@@ -1,10 +1,24 @@
-//Trás do HTML para o JavaScript, a tag form através do id "novoItem"
 const form = document.getElementById("novoItem");
+const lista = document.getElementById('lista');
 
-/*Escuta um evento de "submit" e quebra o comportamento padrão do 
-formulário, que seria enviar os dados de volta para a página.*/
 form.addEventListener('submit', (evento) => {
+    let nome = evento.target.elements['nome'].value;
+    let quantidade = evento.target.elements['quantidade'].value;
+
     evento.preventDefault();
-    console.log(evento.target.elements['nome'].value);
-    console.log(evento.target.elements['quantidade'].value);
-})
+
+    criaElemento(nome, quantidade);
+});
+
+function criaElemento(nome, quantidade) {
+    const novoItem = document.createElement('li');
+    novoItem.classList.add('item');
+
+    const numeroItem = document.createElement('strong');
+    numeroItem.innerHTML = quantidade;
+    
+    novoItem.appendChild(numeroItem);
+    novoItem.innerHTML += nome;
+
+    lista.appendChild(novoItem);
+}
